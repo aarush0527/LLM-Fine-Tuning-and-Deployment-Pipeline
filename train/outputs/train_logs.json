@@ -1,0 +1,78 @@
+{
+  "config": {
+    "model_name": "distilgpt2",
+    "dataset_dir": "data/processed",
+    "output_dir": "train/outputs",
+    "seed": 42,
+    "num_epochs": 3,
+    "batch_size": 4,
+    "gradient_accumulation_steps": 2,
+    "learning_rate": 5e-05,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.1,
+    "max_seq_length": 256,
+    "fp16": false,
+    "logging_steps": 10,
+    "save_strategy": "epoch",
+    "lora": {
+      "enabled": true,
+      "r": 8,
+      "alpha": 16,
+      "dropout": 0.05,
+      "target_modules": [
+        "c_attn",
+        "c_proj"
+      ]
+    }
+  },
+  "seed": 42,
+  "model_name": "distilgpt2",
+  "trainable_params": 405504,
+  "total_params": 82318080,
+  "train_loss": 5.603655497233073,
+  "train_runtime_seconds": 25.7,
+  "train_samples": 26,
+  "val_samples": 3,
+  "history": [
+    {
+      "eval_loss": 3.970280647277832,
+      "eval_runtime": 0.6784,
+      "eval_samples_per_second": 4.422,
+      "eval_steps_per_second": 1.474,
+      "epoch": 1.0,
+      "step": 4
+    },
+    {
+      "eval_loss": 3.9676923751831055,
+      "eval_runtime": 1.3275,
+      "eval_samples_per_second": 2.26,
+      "eval_steps_per_second": 0.753,
+      "epoch": 2.0,
+      "step": 8
+    },
+    {
+      "loss": 5.6319,
+      "grad_norm": 0.46168819069862366,
+      "learning_rate": 1.5e-05,
+      "epoch": 2.571428571428571,
+      "step": 10
+    },
+    {
+      "eval_loss": 3.966609001159668,
+      "eval_runtime": 1.3045,
+      "eval_samples_per_second": 2.3,
+      "eval_steps_per_second": 0.767,
+      "epoch": 3.0,
+      "step": 12
+    },
+    {
+      "train_runtime": 25.5527,
+      "train_samples_per_second": 3.053,
+      "train_steps_per_second": 0.47,
+      "total_flos": 356526194688.0,
+      "train_loss": 5.603655497233073,
+      "epoch": 3.0,
+      "step": 12
+    }
+  ]
+}
