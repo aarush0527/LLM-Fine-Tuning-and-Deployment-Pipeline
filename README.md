@@ -417,9 +417,3 @@ This project is intended as an engineering demonstration.
 
 B.Tech Computer Science & Engineering  
 Bennett University
-
-Interests: Machine Learning, NLP, LLM Systems, AI Engineering
-
----
-
-### ⭐ If you found this project interesting, consider starring the repository.
