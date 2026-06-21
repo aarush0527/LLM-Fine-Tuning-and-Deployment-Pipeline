@@ -1,165 +1,179 @@
-# LLM Fine-Tuning & Deployment Pipeline
+# 🚀 LLM Fine-Tuning & Deployment Pipeline
 
-An end-to-end demonstration of the modern LLM lifecycle: **data generation, preprocessing, LoRA-based fine-tuning, evaluation, deployment, safety guardrails, and automated testing**.
+<p align="center">
 
-This project showcases how a pretrained language model can be adapted, evaluated, served through a production-style API, and protected with lightweight safety mechanisms.
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-DeepLearning-red)
+![Transformers](https://img.shields.io/badge/HuggingFace-Transformers-yellow)
+![PEFT](https://img.shields.io/badge/PEFT-LoRA-purple)
+![FastAPI](https://img.shields.io/badge/FastAPI-Deployment-green)
+![Pytest](https://img.shields.io/badge/Testing-Pytest-orange)
 
----
+</p>
 
-## Overview
+> **An end-to-end LLM engineering pipeline demonstrating data preprocessing, LoRA fine-tuning, evaluation, deployment, safety guardrails, and automated testing.**
 
-Large Language Models are more than training scripts. A real-world workflow involves multiple stages:
-
-1. Data collection and preprocessing
-2. Dataset validation and cleaning
-3. Parameter-efficient fine-tuning
-4. Model evaluation
-5. Deployment through an API
-6. Safety guardrails
-7. Automated testing
-
-This repository implements the complete pipeline using a lightweight GPT-style model and demonstrates the engineering components required to move from raw data to an accessible inference service.
+Unlike typical fine-tuning notebooks, this project focuses on the **complete lifecycle of an LLM system** — from raw data generation to serving a model behind a production-style API.
 
 ---
 
-## Features
+## 🎯 Why This Project?
 
-### Data Pipeline
+Most beginner LLM projects stop after training a model.
 
-* Synthetic dataset generation with realistic noise injection
-* Duplicate record simulation
-* HTML contamination
-* Unicode corruption
-* PII-containing examples
-* Boilerplate/legal text
-* Overly long records
+This repository demonstrates the engineering components required to build a usable LLM workflow:
 
-### Data Cleaning
+- Data generation and preprocessing
+- Dataset quality control
+- Parameter-efficient fine-tuning
+- Quantitative evaluation
+- API deployment
+- Safety guardrails
+- Automated testing
+- Reproducibility and monitoring
 
-* Unicode normalization
-* Duplicate removal
-* HTML detection and filtering
-* PII detection using regex-based rules
-* Boilerplate identification
-* Length-based quality filtering
-* Deterministic train/validation/test splitting
-* Dataset manifest generation
-
-### Fine-Tuning
-
-* LoRA (Low-Rank Adaptation) integration
-* Hugging Face Transformers
-* GPT-style causal language modeling
-* Configurable training parameters
-* Checkpointing and logging
-* Reproducible training via seeded execution
-
-### Evaluation
-
-* Perplexity
-* ROUGE-1
-* ROUGE-2
-* ROUGE-L
-* Token-level F1
-* JSON result export
-
-### Model Serving
-
-* FastAPI-based inference service
-* Request/response schema validation
-* Structured logging
-* Rate limiting
-* Health monitoring endpoint
-* Configurable generation parameters
-
-### Safety Guardrails
-
-* Prompt injection detection
-* Jailbreak pattern filtering
-* Hallucination trap detection
-* Harmful content filtering
-* PII leakage detection
-* Standardized refusal behavior
-
-### Testing
-
-* Unit tests for preprocessing rules
-* Integration tests for cleaning pipeline
-* API contract tests
-* Guardrail validation tests
-* Deterministic pipeline verification
+The objective is not to create a state-of-the-art model, but to showcase how modern LLM systems are built and maintained.
 
 ---
 
-## Project Structure
+## ✨ Features
+
+### 📦 Data Pipeline
+
+- Synthetic dataset generation
+- Noise injection for cleaning demonstrations
+- Duplicate records
+- HTML contamination
+- Broken Unicode text
+- PII-containing samples
+- Boilerplate/legal text
+
+### 🧹 Data Cleaning
+
+- Unicode normalization
+- Deduplication using hashing
+- HTML filtering
+- Regex-based PII detection
+- Boilerplate removal
+- Length-based filtering
+- Deterministic dataset splitting
+
+### 🧠 Fine-Tuning
+
+- DistilGPT2 base model
+- LoRA (Low-Rank Adaptation)
+- Hugging Face Transformers
+- Reproducible training configuration
+- Automatic checkpointing
+- Training logs and metadata
+
+### 📊 Evaluation
+
+- Perplexity
+- ROUGE-1
+- ROUGE-2
+- ROUGE-L
+- Token-level F1
+
+### ⚡ Serving
+
+- FastAPI inference API
+- Structured logging
+- Health monitoring
+- Rate limiting
+- Request validation
+- Configurable generation parameters
+
+### 🛡️ Safety
+
+- Prompt injection detection
+- Jailbreak filtering
+- Hallucination-trap detection
+- PII leakage protection
+- Standardized refusal responses
+
+### 🧪 Testing
+
+- Unit tests
+- Integration tests
+- API contract tests
+- Guardrail validation
+- Reproducibility verification
+
+---
+
+## 🏗️ System Architecture
+
+```text
+Raw Dataset
+      │
+      ▼
+Noise Injection
+      │
+      ▼
+Data Cleaning Pipeline
+      │
+      ▼
+Train / Validation / Test Split
+      │
+      ▼
+LoRA Fine-Tuning
+      │
+      ▼
+Model Evaluation
+      │
+      ▼
+FastAPI Deployment
+      │
+      ▼
+Guardrails + Monitoring
+      │
+      ▼
+Inference API
+```
+
+---
+
+## 📂 Project Structure
 
 ```text
 .
 ├── data
-│   ├── raw
-│   ├── processed
+│   ├── raw/
+│   ├── processed/
 │   ├── generate_dirty.py
 │   └── clean.py
 │
-├── train
+├── train/
 │   └── finetune.py
 │
-├── eval
+├── eval/
 │   ├── metric.py
 │   └── human_eval_rubric.yaml
 │
-├── serve
+├── serve/
 │   ├── app.py
 │   └── guardrails.py
 │
-├── tests
+├── tests/
 │   ├── test_clean.py
 │   └── test_api.py
 │
-├── README.md
 ├── MODEL_CARD.md
 ├── DATA_CARD.md
+├── Dockerfile
 ├── requirements.txt
-└── Dockerfile
+└── README.md
 ```
 
 ---
 
-## Pipeline Architecture
-
-```text
-Raw Data
-    │
-    ▼
-Noise Injection
-    │
-    ▼
-Cleaning Pipeline
-    │
-    ▼
-Train / Validation / Test Split
-    │
-    ▼
-LoRA Fine-Tuning
-    │
-    ▼
-Evaluation
-    │
-    ▼
-FastAPI Deployment
-    │
-    ▼
-Guardrails + Monitoring
-```
-
----
-
-## Installation
+## ⚙️ Installation
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/LLM-Fine-Tuning-and-Deployment-Pipeline.git
+git clone https://github.com/your-username/LLM-Fine-Tuning-and-Deployment-Pipeline.git
 
 cd LLM-Fine-Tuning-and-Deployment-Pipeline
 ```
@@ -170,7 +184,7 @@ Create a virtual environment:
 python -m venv llm_env
 ```
 
-Activate it:
+Activate:
 
 ```bash
 # Windows
@@ -188,9 +202,9 @@ pip install -r requirements.txt
 
 ---
 
-## Usage
+## 🚦 Quick Start
 
-### Step 1: Generate Raw Dataset
+### 1. Generate Raw Data
 
 ```bash
 python -m data.generate_dirty
@@ -202,17 +216,15 @@ Creates:
 data/raw/dirty_data.jsonl
 ```
 
-containing intentionally corrupted examples.
-
 ---
 
-### Step 2: Clean Dataset
+### 2. Clean Dataset
 
 ```bash
 python -m data.clean
 ```
 
-Produces:
+Outputs:
 
 ```text
 data/processed/train.jsonl
@@ -223,7 +235,7 @@ data/processed/manifest.json
 
 ---
 
-### Step 3: Fine-Tune Model
+### 3. Fine-Tune Model
 
 ```bash
 python -m train.finetune
@@ -235,33 +247,37 @@ Outputs:
 train/outputs/final/
 ```
 
-along with training logs and checkpoints.
-
 ---
 
-### Step 4: Evaluate
+### 4. Evaluate
 
 ```bash
 python -m eval.metric
 ```
 
-Generates:
+Outputs:
 
 ```text
 eval/results.json
 ```
 
-including perplexity, ROUGE, and token-level F1 scores.
-
 ---
 
-### Step 5: Start API Server
+### 5. Launch API
 
 ```bash
 uvicorn serve.app:app --host 0.0.0.0 --port 8000
 ```
 
+Swagger UI:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
 ---
+
+## 🔌 API Endpoints
 
 ### Health Check
 
@@ -269,7 +285,7 @@ uvicorn serve.app:app --host 0.0.0.0 --port 8000
 GET /health
 ```
 
-Example response:
+Response:
 
 ```json
 {
@@ -281,7 +297,7 @@ Example response:
 
 ---
 
-### Text Generation
+### Generate Text
 
 ```http
 POST /generate
@@ -304,41 +320,26 @@ Response:
 {
   "generated_text": "...",
   "token_count": 52,
-  "latency_ms": 841.23,
+  "latency_ms": 842.4,
   "safe_mode": true
 }
 ```
 
 ---
 
-## Evaluation Metrics
+## 📈 Evaluation Metrics
 
-| Metric     | Purpose                              |
-| ---------- | ------------------------------------ |
-| Perplexity | Measures predictive uncertainty      |
-| ROUGE-1    | Unigram overlap                      |
-| ROUGE-2    | Bigram overlap                       |
-| ROUGE-L    | Longest common subsequence overlap   |
-| Token F1   | Token-level precision/recall balance |
-
----
-
-## Safety Features
-
-The serving layer includes lightweight guardrails to demonstrate common safety practices:
-
-* Prompt injection detection
-* Jailbreak prevention
-* Harmful request filtering
-* Hallucination-trap detection
-* PII leakage checks
-* Standard refusal responses
-
-These mechanisms are intended for demonstration and educational purposes rather than production-grade alignment.
+| Metric | Purpose |
+|----------|----------|
+| Perplexity | Language modeling quality |
+| ROUGE-1 | Unigram overlap |
+| ROUGE-2 | Bigram overlap |
+| ROUGE-L | Sequence similarity |
+| Token F1 | Token-level precision & recall |
 
 ---
 
-## Testing
+## 🧪 Testing
 
 Run all tests:
 
@@ -346,20 +347,20 @@ Run all tests:
 pytest
 ```
 
-Test coverage includes:
+Coverage includes:
 
-* Data cleaning rules
-* Unicode normalization
-* PII detection
-* HTML filtering
-* Dataset splitting
-* API contract validation
-* Guardrail behavior
-* Rate limiting
+- Cleaning pipeline validation
+- Unicode normalization
+- HTML filtering
+- PII detection
+- Dataset splitting
+- API contract validation
+- Rate limiting
+- Guardrail enforcement
 
 ---
 
-## Model Card
+## 📋 Model Card
 
 See:
 
@@ -367,11 +368,11 @@ See:
 MODEL_CARD.md
 ```
 
-for model details, limitations, intended use cases, and deployment information.
+for model configuration, limitations, and intended use.
 
 ---
 
-## Data Card
+## 📄 Data Card
 
 See:
 
@@ -379,48 +380,46 @@ See:
 DATA_CARD.md
 ```
 
-for dataset generation methodology, cleaning procedures, and known limitations.
+for dataset generation methodology, preprocessing decisions, and known limitations.
 
 ---
 
-## Limitations
+## ⚠️ Limitations
 
-This project is intended as an educational and engineering demonstration.
+This project is intended as an engineering demonstration.
 
-* Uses a lightweight pretrained language model
-* Trains on a small synthetic dataset
-* Focuses on pipeline design rather than model performance
-* Safety mechanisms are rule-based and not comprehensive
-* Evaluation results are illustrative rather than benchmark-oriented
-
-The primary objective is to demonstrate the end-to-end workflow of modern LLM systems rather than achieve state-of-the-art generation quality.
+- Uses a lightweight pretrained language model
+- Trains on a small synthetic dataset
+- Safety mechanisms are rule-based
+- Evaluation results are illustrative
+- Focuses on workflow design rather than benchmark performance
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-* Python
-* Hugging Face Transformers
-* PEFT (LoRA)
-* PyTorch
-* FastAPI
-* Pydantic
-* Structlog
-* Pytest
-
----
-
-## License
-
-This project is released for educational and research purposes.
+| Category | Tools |
+|-----------|--------|
+| Language | Python |
+| Deep Learning | PyTorch |
+| LLM Framework | Hugging Face Transformers |
+| Fine-Tuning | PEFT (LoRA) |
+| API Serving | FastAPI |
+| Validation | Pydantic |
+| Logging | Structlog |
+| Testing | Pytest |
 
 ---
 
-## Author
+## 👨‍💻 Author
 
 **Aarush Tiwari**
 
-Computer Science & Engineering
+B.Tech Computer Science & Engineering  
 Bennett University
 
-Interested in Machine Learning, NLP, LLM Systems, and AI Engineering.
+Interests: Machine Learning, NLP, LLM Systems, AI Engineering
+
+---
+
+### ⭐ If you found this project interesting, consider starring the repository.
